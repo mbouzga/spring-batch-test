@@ -17,7 +17,7 @@ public class Processor implements ItemProcessor<User, User> {
 
 	@Override
 	public User process(User user) throws Exception {
-		Optional<User> userFromDb = userRepo.findById(user.getUserId());
+		Optional<User> userFromDb = userRepo.findByUserId(user.getUserId());
 		if(userFromDb.isPresent()) {
 			user.setAccount(user.getAccount().add(userFromDb.get().getAccount()));
 		}
