@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.example.entity.User;
 import com.example.repository.UserRepository;
+import com.example.service.IUserService;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -22,12 +23,12 @@ public class UserTest {
     private TestEntityManager entityManager;
 	
 	@Autowired
-	private UserRepository userRepo;
+	private IUserService userService;
 	
 	@Test
 	public void saveUserTest() {
 		User user1 = new User(123L,"bouzga","59",BigDecimal.valueOf(15000));
-		User userSaved = userRepo.save(user1);
+		User userSaved = userService.save(user1);
 		assertThat(userSaved.getName()).isEqualTo("bouzga");
 	}
 }

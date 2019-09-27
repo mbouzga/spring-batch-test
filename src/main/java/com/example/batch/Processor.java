@@ -8,16 +8,17 @@ import org.springframework.stereotype.Component;
 
 import com.example.entity.User;
 import com.example.repository.UserRepository;
+import com.example.service.UserService;
 
 @Component
 public class Processor implements ItemProcessor<User, User> {
 
 	@Autowired
-	private UserRepository userRepo;
+	private UserService userService;
 
 	@Override
 	public User process(User user) throws Exception {
-		Optional<User> userFromDb = userRepo.findByUserId(user.getUserId());
+		Optional<User> userFromDb = userService.findByUserId(user.getUserId());
 		if(userFromDb.isPresent()) {
 			user.setAccount(user.getAccount().add(userFromDb.get().getAccount()));
 		}
